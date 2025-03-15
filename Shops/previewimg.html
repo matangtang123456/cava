@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Preview with Active State</title>
+    <style>
+        /* Style for the gallery */
+        .gallery {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Thumbnail images */
+        .thumbnails img {
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            transition: border 0.3s ease;
+        }
+
+        /* Main preview image */
+        .preview img {
+            width: 400px;
+            height: 200px;
+        }
+
+        /* Active state for the thumbnail */
+        .thumbnails img.active {
+            border: 2px solid blue;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="preview">
+        <img id="mainImage" src="/img/products/f1.jpg" alt="Main Preview">
+    </div>
+
+    <div class="gallery thumbnails">
+        <img src="/img/products/f1.jpg" alt="Image 1" class="active" onclick="previewImage(this)">
+        <img src="/img/products/f2.jpg" alt="Image 2" onclick="previewImage(this)">
+        <img src="/img/products/f3.jpg" alt="Image 3" onclick="previewImage(this)">
+        <img src="/img/products/f4.jpg" alt="Image 4" onclick="previewImage(this)">
+    </div>
+
+    <script>
+        function previewImage(imgElement) {
+            // Get the main image element
+            const mainImage = document.getElementById('mainImage');
+
+            // Update the main image src with the clicked thumbnail's src
+            mainImage.src = imgElement.src;
+
+            // Remove the 'active' class from all thumbnails
+            const thumbnails = document.querySelectorAll('.thumbnails img');
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+
+            // Add the 'active' class to the clicked thumbnail
+            imgElement.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
